@@ -1,0 +1,98 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity"
+    android:id="@+id/RelativeLayout"
+    android:background="#ffffffff">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Logo"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="38dp"
+        android:src="@drawable/sardalogo" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/Welcome"
+        android:id="@+id/WelcomeText"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textColor="#ff450cff" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/Motto"
+        android:id="@+id/Motto"
+        android:layout_below="@+id/Logo"
+        android:layout_centerHorizontal="true"
+        android:textColor="#ff450cff"
+        android:layout_marginTop="18dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/copy"
+        android:id="@+id/copyRight"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/login_requets"
+        android:id="@+id/login"
+        android:layout_marginTop="44dp"
+        android:onClick="onClick"
+        android:background="#ff450cff"
+        android:layout_below="@+id/Motto"
+        android:layout_toRightOf="@+id/copyRight"
+        android:layout_toEndOf="@+id/copyRight" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/SignUp_requets"
+        android:id="@+id/SignUp"
+        android:onClick="onClick"
+        android:background="#ff450cff"
+        android:layout_alignBaseline="@+id/login"
+        android:layout_alignBottom="@+id/login"
+        android:layout_toLeftOf="@+id/copyRight"
+        android:layout_toStartOf="@+id/copyRight" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ABOUT US"
+        android:id="@+id/bout"
+        android:background="#ff450cff"
+        android:onClick="onClick"
+        android:layout_above="@+id/copyRight"
+        android:layout_alignRight="@+id/login"
+        android:layout_alignEnd="@+id/login" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="calender"
+        android:id="@+id/calender"
+        android:onClick="onClick"
+        android:background="#ff450cff"
+        android:layout_above="@+id/copyRight"
+        android:layout_toLeftOf="@+id/copyRight"
+        android:layout_toStartOf="@+id/copyRight" />
+
+</RelativeLayout>
