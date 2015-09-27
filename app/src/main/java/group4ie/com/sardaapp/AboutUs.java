@@ -9,7 +9,7 @@ import android.view.View;
 
 import group4ie.com.sardaapp.R;
 
-public class AboutUs extends ActionBarActivity {
+public class AboutUs extends ActionBarActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

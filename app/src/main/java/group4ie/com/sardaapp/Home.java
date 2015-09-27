@@ -12,16 +12,22 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 
 
 public class Home extends ActionBarActivity
 {
+    EditText name,email,user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        name = (EditText) findViewById(R.id.Name);
+        email = (EditText) findViewById(R.id.email);
+        user = (EditText) findViewById(R.id.userName);
     }
 
     @Override

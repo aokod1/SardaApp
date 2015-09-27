@@ -8,6 +8,14 @@ public class Contact
     int id;
     String Name,Email,User,Pass;
 
+    public Contact(String name, String email, String usr, String pss)
+    {
+        Name = name;
+        Email = email;
+        User = usr;
+        Pass = pss;
+    }
+
     public void setName(String nme)
     {
         Name = nme;

@@ -1,5 +1,6 @@
 package group4ie.com.sardaapp;
 
+import android.graphics.Color;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -12,7 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-public class Login extends ActionBarActivity {
+public class Login extends ActionBarActivity implements View.OnClickListener {
 
     private EditText usernameField,passwordField;
     private TextView status,role,method;
@@ -30,7 +31,7 @@ public class Login extends ActionBarActivity {
     }
 
 
-    public void onClick(View view)
+    public void onClick(View view) // for back button
     {
         if (view == findViewById(R.id.Back))
         {
@@ -55,18 +56,6 @@ public class Login extends ActionBarActivity {
 
             EditText b = (EditText)findViewById(R.id.PasswordText);
             String pass = b.getText().toString();
-
-            String password = helper.searchPass(str);
-
-            if(pass.equals(password))
-            {
-                Toast pas = Toast.makeText(Login.this,"SIGN IN SUCCESFULL!",Toast.LENGTH_SHORT);
-                pas.show();
-            } else if(!pass.equals(password))
-            {
-                Toast pas = Toast.makeText(Login.this,"FAILED",Toast.LENGTH_SHORT);
-                pas.show();
-            }
         }
 
 

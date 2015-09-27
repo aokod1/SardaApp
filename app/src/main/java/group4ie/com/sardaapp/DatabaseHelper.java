@@ -18,7 +18,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
     private static final String COLUMN_PASSWORD = "Password";
     SQLiteDatabase db;
 
-    private static final String TABLE_CREATE = "create table contacts (id integer primary key not null auto_increment ," + "Name text not null, Email text not null, User Name text not null, Password text not null)";
+    private static final String TABLE_CREATE = "create table contacts (id integer primary key not null  ," + "Name text not null, Email text not null, User Name text not null, Password text not null)";
 
 
 
@@ -47,6 +47,12 @@ public class DatabaseHelper extends SQLiteOpenHelper
     {
       db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
+        String query = "SELECT *  from contacts";
+        Cursor cursor = db.rawQuery(query,null);
+
+        int count = cursor.getCount();
+        values.put(COLUMN_ID, count);
+
         values.put(COLUMN_NAME,c.getName());
         values.put(COLUMN_EMAIL, c.getEmail());
         values.put(COLUMN_PASSWORD, c.getPass());

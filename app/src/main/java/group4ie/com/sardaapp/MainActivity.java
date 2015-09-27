@@ -1,5 +1,6 @@
 package group4ie.com.sardaapp;
 
+import android.os.StrictMode;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,13 +10,16 @@ import android.view.View;
 import android.widget.Button;
 import android.content.Intent;
 
-public class MainActivity extends ActionBarActivity  {
+public class MainActivity extends ActionBarActivity implements View.OnClickListener  {
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
     }
 
     public void onClick(View view)

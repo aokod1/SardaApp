@@ -20,11 +20,11 @@
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="150dp"
-        android:id="@+id/listView"
-        android:layout_marginTop="34dp"
-        android:layout_below="@+id/compactcalendar_view"
+        android:id="@+id/bookings_listview"
+        android:layout_above="@+id/Back"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/compactcalendar_view" />
 
     <Button
         android:layout_width="wrap_content"
@@ -33,6 +33,6 @@
         android:id="@+id/Back"
         android:onClick="onClick"
         android:background="#ff450cff"
-        android:layout_below="@+id/listView"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>
