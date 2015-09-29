@@ -18,16 +18,28 @@ import android.widget.LinearLayout;
 
 public class Home extends ActionBarActivity
 {
-    EditText name,email,user;
+    EditText name,email,user, password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+
+
+    }
+
+    public void displayDetails(String nme, String mail, String User, String pass)
+    {
         name = (EditText) findViewById(R.id.Name);
         email = (EditText) findViewById(R.id.email);
         user = (EditText) findViewById(R.id.userName);
+        password = (EditText) findViewById(R.id.Password);
+
+        name.setText(nme);
+        email.setText(mail);
+        user.setText(User);
+        password.setText(pass);
     }
 
     @Override

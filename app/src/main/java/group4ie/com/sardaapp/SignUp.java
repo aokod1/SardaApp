@@ -5,14 +5,17 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.*;
 import android.widget.Toast;
@@ -26,12 +29,20 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
+import org.json.JSONObject;
 
 
 public class SignUp extends Activity implements View.OnClickListener {
 
-    DatabaseHelper helper;
-    InputStream is = null;
+    String name;
+    String id;
+    InputStream is=null;
+    String result=null;
+    String line=null;
+    int code;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,29 +111,61 @@ public class SignUp extends Activity implements View.OnClickListener {
         nameValuePairs.add(new BasicNameValuePair("User_Name", userStr));
         nameValuePairs.add(new BasicNameValuePair("User_Password", passStr));
 
-         try{
-         HttpClient httpClient = new DefaultHttpClient(); // This is where i am. I am trying to get the databse connection
+        try
+        {
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpPost httppost = new HttpPost("winmysqls02.cpt.wa.co.za/index.php");
+            httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+            HttpResponse response = httpclient.execute(httppost);
+            HttpEntity entity = response.getEntity();
+            is = entity.getContent();
+            Log.e("pass 1", "connection success ");
+        }
+        catch(Exception e)
+        {
+            Log.e("Fail 1", e.toString());
+            Toast.makeText(getApplicationContext(), "Invalid IP Address",
+                    Toast.LENGTH_LONG).show();
+        }
 
-         HttpPost httpPost = new HttpPost("http://127.0.0.1/sign.php");
-         httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+        try
+        {
+            BufferedReader reader = new BufferedReader
+                    (new InputStreamReader(is,"iso-8859-1"),8);
+            StringBuilder sb = new StringBuilder();
+            while ((line = reader.readLine()) != null)
+            {
+                sb.append(line + "\n");
+            }
+            is.close();
+            result = sb.toString();
+            Log.e("pass 2", "connection success ");
+        }
+        catch(Exception e)
+        {
+            Log.e("Fail 2", e.toString());
+        }
 
-             HttpResponse response = httpClient.execute(httpPost);
-             HttpEntity entity = response.getEntity();
-             is = entity.getContent();
+        try
+        {
+            JSONObject json_data = new JSONObject(result);
+            code=(json_data.getInt("code"));
 
-             Toast pas = Toast.makeText(SignUp.this, "Entered succefully", Toast.LENGTH_SHORT);
-             pas.show();
-         }
-
-         catch (UnsupportedEncodingException e) {
-             e.printStackTrace();
-         } catch (ClientProtocolException e) {
-             e.printStackTrace();
-         } catch (IOException e) {
-             e.printStackTrace();
-         }
-
-
+            if(code==1)
+            {
+                Toast.makeText(getBaseContext(), "Inserted Successfully",
+                        Toast.LENGTH_SHORT).show();
+            }
+            else
+            {
+                Toast.makeText(getBaseContext(), "Sorry, Try Again",
+                        Toast.LENGTH_LONG).show();
+            }
+        }
+        catch(Exception e)
+        {
+            Log.e("Fail 3", e.toString());
+        }
     }
 
 
