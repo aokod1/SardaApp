@@ -1,5 +1,6 @@
 package group4ie.com.sardaapp;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -12,34 +13,31 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
 
-public class Home extends ActionBarActivity
+public class Home extends ActionBarActivity implements View.OnClickListener
 {
     EditText name,email,user, password;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-
-
     }
 
-    public void displayDetails(String nme, String mail, String User, String pass)
+    public void displayUserDetails()
     {
+
         name = (EditText) findViewById(R.id.Name);
         email = (EditText) findViewById(R.id.email);
         user = (EditText) findViewById(R.id.userName);
-        password = (EditText) findViewById(R.id.Password);
 
-        name.setText(nme);
-        email.setText(mail);
-        user.setText(User);
-        password.setText(pass);
+
     }
 
     @Override
@@ -62,5 +60,15 @@ public class Home extends ActionBarActivity
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+    public void onClick(View view) // for logout button
+    {
+        if (view == (View) findViewById(R.id.Logout)) // code used to check which button has been clicked
+        {
+            Intent i = new Intent(this, MainActivity.class);
+            startActivity(i);
+        }
     }
 }

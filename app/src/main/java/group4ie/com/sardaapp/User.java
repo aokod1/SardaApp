@@ -3,17 +3,23 @@ package group4ie.com.sardaapp;
 /**
  * Created by akodi on 9/3/2015.
  */
-public class Contact
+public class User
 {
     int id;
-    String Name,Email,User,Pass;
+    String Name,Email,User,Password;
 
-    public Contact(String name, String email, String usr, String pss)
+    public User(String name, String email, String usr, String pss)
     {
         Name = name;
         Email = email;
         User = usr;
-        Pass = pss;
+        Password = pss;
+    }
+
+    public User(String user,String pass)
+    {
+        User = user;
+        Password = pass;
     }
 
     public void setName(String nme)
@@ -38,12 +44,12 @@ public class Contact
 
     public String getPass()
     {
-        return Pass;
+        return Password;
     }
 
     public void setPass(String pss)
     {
-        Pass = pss;
+        Password = pss;
     }
 
     public void setEmail(String em)

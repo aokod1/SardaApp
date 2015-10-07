@@ -1,8 +1,10 @@
 package group4ie.com.sardaapp;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
@@ -35,41 +38,42 @@ import org.apache.http.params.HttpParams;
 import org.json.JSONObject;
 
 
-public class SignUp extends Activity implements View.OnClickListener {
-
-    String name;
-    String id;
-    InputStream is=null;
-    String result=null;
-    String line=null;
-    int code;
+public class SignUp extends Activity implements View.OnClickListener
+{
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
     }
 
     public void onClick(View view)// for back button
     {
-        if (view == findViewById(R.id.BackTwo)) {
+        if (view == findViewById(R.id.BackTwo))
+        {
             Intent b = new Intent(this, MainActivity.class);
             startActivity(b);
         }
     }
 
-    public void onClickSignUp(View v) {
+    // Sign up button
+    public void onClickSignUp(View v)
+    {
+
         EditText Name = (EditText) findViewById(R.id.Name);
         EditText Email = (EditText) findViewById(R.id.email);
         EditText Password = (EditText) findViewById(R.id.Password);
         EditText Password2 = (EditText) findViewById(R.id.Password2);
         EditText UserName = (EditText) findViewById(R.id.userName);
+        EditText Day = (EditText) findViewById(R.id.day);
 
         String nameStr = Name.getText().toString();
         String emailStr = Email.getText().toString();
         String passStr = Password.getText().toString();
         String passStr2 = Password2.getText().toString();
         String userStr = UserName.getText().toString();
+        String dayStr = Day.getText().toString();
 
         if (passStr.equals(passStr2) && !passStr.equals("") || !passStr2.equals("")) {
             Toast pass = Toast.makeText(SignUp.this, "Passwords Match!", Toast.LENGTH_SHORT);
@@ -104,70 +108,81 @@ public class SignUp extends Activity implements View.OnClickListener {
             pass.show();
         }
 
-
-        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
-        nameValuePairs.add(new BasicNameValuePair("Name", nameStr));
-        nameValuePairs.add(new BasicNameValuePair("Email", emailStr));
-        nameValuePairs.add(new BasicNameValuePair("User_Name", userStr));
-        nameValuePairs.add(new BasicNameValuePair("User_Password", passStr));
-
-        try
+        if(!dayStr.equals("Monday") ||!dayStr.equals("Tuesday") || !dayStr.equals("Wednesday")||!dayStr.equals("Thursday") || !dayStr.equals("Friday") || !dayStr.equals("Saturday") || !dayStr.equals("Sunday") )
         {
-            HttpClient httpclient = new DefaultHttpClient();
-            HttpPost httppost = new HttpPost("winmysqls02.cpt.wa.co.za/index.php");
-            httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-            HttpResponse response = httpclient.execute(httppost);
-            HttpEntity entity = response.getEntity();
-            is = entity.getContent();
-            Log.e("pass 1", "connection success ");
-        }
-        catch(Exception e)
-        {
-            Log.e("Fail 1", e.toString());
-            Toast.makeText(getApplicationContext(), "Invalid IP Address",
-                    Toast.LENGTH_LONG).show();
+            Day.setHintTextColor(Color.RED);
+            Toast pass = Toast.makeText(SignUp.this, "Incorrect Shift Day entered", Toast.LENGTH_SHORT);
+            pass.show();
         }
 
-        try
-        {
-            BufferedReader reader = new BufferedReader
-                    (new InputStreamReader(is,"iso-8859-1"),8);
-            StringBuilder sb = new StringBuilder();
-            while ((line = reader.readLine()) != null)
-            {
-                sb.append(line + "\n");
-            }
-            is.close();
-            result = sb.toString();
-            Log.e("pass 2", "connection success ");
-        }
-        catch(Exception e)
-        {
-            Log.e("Fail 2", e.toString());
-        }
-
-        try
-        {
-            JSONObject json_data = new JSONObject(result);
-            code=(json_data.getInt("code"));
-
-            if(code==1)
-            {
-                Toast.makeText(getBaseContext(), "Inserted Successfully",
-                        Toast.LENGTH_SHORT).show();
-            }
-            else
-            {
-                Toast.makeText(getBaseContext(), "Sorry, Try Again",
-                        Toast.LENGTH_LONG).show();
-            }
-        }
-        catch(Exception e)
-        {
-            Log.e("Fail 3", e.toString());
-        }
+        insertToDatabase(emailStr,nameStr,userStr,passStr,dayStr);
     }
 
+    private void insertToDatabase(final String email, String name,String user,String pass,String dy)
+    {
+        class SendPostReqAsyncTask extends AsyncTask<String, Void, String> {
+            @Override
+            protected String doInBackground(String... params) {
+
+                EditText Name = (EditText) findViewById(R.id.Name);
+                EditText Email = (EditText) findViewById(R.id.email);
+                EditText Password = (EditText) findViewById(R.id.Password);
+                EditText Password2 = (EditText) findViewById(R.id.Password2);
+                EditText UserName = (EditText) findViewById(R.id.userName);
+                EditText Day = (EditText) findViewById(R.id.day);
+
+                String nameSt;
+                String emailSt;
+                String passSt;
+                String userSt;
+                String dayStr;
+
+                nameSt = Name.getText().toString();
+                emailSt = Email.getText().toString();
+                passSt = Password.getText().toString();
+                userSt = UserName.getText().toString();
+                dayStr = Day.getText().toString();
+
+
+                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+                nameValuePairs.add(new BasicNameValuePair("Email", emailSt));
+                nameValuePairs.add(new BasicNameValuePair("Name", nameSt));
+                nameValuePairs.add(new BasicNameValuePair("Day", dayStr));
+                nameValuePairs.add(new BasicNameValuePair("User_Name", userSt));
+                nameValuePairs.add(new BasicNameValuePair("User_Password", passSt));
+
+
+                try {
+
+                    HttpClient httpClient = new DefaultHttpClient();
+                    HttpPost httpPost = new HttpPost("http://sarda.comule.com/insert.php");
+                    httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
+                    HttpResponse response = httpClient.execute(httpPost);
+
+                    HttpEntity entity = response.getEntity();
+
+                } catch (ClientProtocolException e) {
+
+                } catch (IOException e) {
+
+                }
+                return "success";
+            }
+
+            @Override
+            protected void onPostExecute(String result) {
+                super.onPostExecute(result);
+                Toast pss = Toast.makeText(SignUp.this,result, Toast.LENGTH_SHORT);
+                pss.show();
+            }
+        }
+        SendPostReqAsyncTask sendPostReqAsyncTask = new SendPostReqAsyncTask();
+        sendPostReqAsyncTask.execute(email, name,user,pass);
+
+        Intent i = new Intent(this, Login.class);
+        startActivity(i);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -1,5 +1,6 @@
 package group4ie.com.sardaapp;
 
+import android.app.AlertDialog;
 import android.graphics.Color;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -15,10 +16,11 @@ import android.widget.Toast;
 
 public class Login extends ActionBarActivity implements View.OnClickListener {
 
-    private EditText usernameField,passwordField;
-    private TextView status,role,method;
-    EditText mEdit;
-    DatabaseHelper helper;
+    EditText usernameField,passwordField;
+    Button loginBut;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -26,8 +28,10 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        usernameField = (EditText)findViewById(R.id.userName);
-        passwordField = (EditText)findViewById(R.id.PasswordText);
+
+       // usernameField = (EditText)findViewById(R.id.userName);
+        //passwordField = (EditText)findViewById(R.id.PasswordText);
+
     }
 
 
@@ -47,7 +51,7 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
         return true;
     }
 
-    public void onClickLogin(View v)
+    public void onClickLogin(View v) // when you click the login button
     {
         if(v.getId() == R.id.loginButton)
         {
@@ -56,10 +60,21 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
 
             EditText b = (EditText)findViewById(R.id.PasswordText);
             String pass = b.getText().toString();
+
         }
 
-
     }
+
+
+
+    private void showErrorMessage()
+    {
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Login.this);
+        dialogBuilder.setMessage("Incorrect User Details");
+        dialogBuilder.setPositiveButton("ok", null);
+        dialogBuilder.show();
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

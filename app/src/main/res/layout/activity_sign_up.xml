@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/details"
-        android:id="@+id/home_text"
+        android:id="@+id/welcome_text"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:textColor="#ff450cff" />
@@ -24,8 +24,8 @@
         android:hint="John Doe"
         android:ems="10"
         android:id="@+id/Name"
-        android:layout_marginTop="32dp"
-        android:layout_below="@+id/home_text"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/welcome_text"
         android:layout_centerHorizontal="true" />
 
     <EditText
@@ -37,7 +37,18 @@
         android:hint="User Name"
         android:layout_below="@+id/email"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="18dp" />
+        android:layout_marginTop="15dp"
+        />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:ems="10"
+        android:id="@+id/day"
+        android:hint="Monday Tuesday etc"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -49,7 +60,7 @@
         android:layout_below="@+id/Name"
         android:layout_alignLeft="@+id/Name"
         android:layout_alignStart="@+id/Name"
-        android:layout_marginTop="18dp" />
+        android:layout_marginTop="15dp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -59,8 +70,8 @@
         android:background="#ff450cff"
         android:layout_marginBottom="31dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/home_text"
-        android:layout_alignEnd="@+id/home_text"
+        android:layout_alignRight="@+id/welcome_text"
+        android:layout_alignEnd="@+id/welcome_text"
         android:onClick="onClickSignUp" />
 
     <Button
@@ -70,8 +81,8 @@
         android:id="@+id/BackTwo"
         android:background="#ff450cff"
         android:layout_alignTop="@+id/signUpButton"
-        android:layout_alignLeft="@+id/home_text"
-        android:layout_alignStart="@+id/home_text"
+        android:layout_alignLeft="@+id/welcome_text"
+        android:layout_alignStart="@+id/welcome_text"
         android:onClick="onClick"/>
 
     <EditText
@@ -81,9 +92,10 @@
         android:ems="10"
         android:hint="Password"
         android:id="@+id/Password"
-        android:layout_below="@+id/userName"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="18dp" />
+        android:layout_below="@+id/day"
+        android:layout_marginTop="30dp"
+        android:layout_alignLeft="@+id/Password2"
+        android:layout_alignStart="@+id/Password2" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -94,6 +106,9 @@
         android:id="@+id/Password2"
         android:layout_below="@+id/Password"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp" />
+        android:layout_marginTop="20dp" />
+
+
+
 
 </RelativeLayout>
