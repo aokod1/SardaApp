@@ -116,7 +116,8 @@ public class SignUp extends Activity implements View.OnClickListener
     {
         class SendPostReqAsyncTask extends AsyncTask<String, Void, String> {
             @Override
-            protected String doInBackground(String... params) {
+            protected String doInBackground(String... params)
+            {
 
                 EditText Name = (EditText) findViewById(R.id.Name);
                 EditText Email = (EditText) findViewById(R.id.email);
