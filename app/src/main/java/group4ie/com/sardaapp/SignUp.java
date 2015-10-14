@@ -108,12 +108,6 @@ public class SignUp extends Activity implements View.OnClickListener
             pass.show();
         }
 
-        if(!dayStr.equals("Monday") ||!dayStr.equals("Tuesday") || !dayStr.equals("Wednesday")||!dayStr.equals("Thursday") || !dayStr.equals("Friday") || !dayStr.equals("Saturday") || !dayStr.equals("Sunday") )
-        {
-            Day.setHintTextColor(Color.RED);
-            Toast pass = Toast.makeText(SignUp.this, "Incorrect Shift Day entered", Toast.LENGTH_SHORT);
-            pass.show();
-        }
 
         insertToDatabase(emailStr,nameStr,userStr,passStr,dayStr);
     }

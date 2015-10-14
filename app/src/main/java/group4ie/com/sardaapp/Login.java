@@ -1,39 +1,38 @@
 package group4ie.com.sardaapp;
 
 import android.app.AlertDialog;
+import android.app.DownloadManager;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.content.Intent;
 import android.widget.EditText;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 import android.widget.Toast;
+import java.util.HashMap;
+import java.util.Map;
+
+//LOGIN_URL = "http://sarda.comule.com/Login.php";
 
 
-public class Login extends ActionBarActivity implements View.OnClickListener {
+public class Login extends AppCompatActivity implements View.OnClickListener {
 
     EditText usernameField,passwordField;
     Button loginBut;
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-
-       // usernameField = (EditText)findViewById(R.id.userName);
-        //passwordField = (EditText)findViewById(R.id.PasswordText);
-
     }
-
 
     public void onClick(View view) // for back button
     {
@@ -56,25 +55,13 @@ public class Login extends ActionBarActivity implements View.OnClickListener {
         if(v.getId() == R.id.loginButton)
         {
             EditText a = (EditText)findViewById(R.id.userName);
-            String str = a.getText().toString();
+            String user = a.getText().toString();
 
             EditText b = (EditText)findViewById(R.id.PasswordText);
             String pass = b.getText().toString();
-
         }
 
     }
-
-
-
-    private void showErrorMessage()
-    {
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Login.this);
-        dialogBuilder.setMessage("Incorrect User Details");
-        dialogBuilder.setPositiveButton("ok", null);
-        dialogBuilder.show();
-    }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
